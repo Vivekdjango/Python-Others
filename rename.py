@@ -7,6 +7,8 @@ import json
 import requests
 import json
 
+#Argument Passing
+
 def get_args():
 	parser = argparse.ArgumentParser()
 	parser.add_argument('-c','--current_hostname')
@@ -19,6 +21,8 @@ def get_args():
 	data={"current":old,"new":new,"profile":profile}
 	return data
 
+
+#Rest API to upload data
 
 def set_ipam():
 	i=get_args()
@@ -35,6 +39,8 @@ def set_ipam():
 	r=requests.post(url,data)
 	print (r.status_code,r.text)
 
+#DNS Setting
+
 def set_dns():
 	i=get_args()
 	print "Updating DNS for %s"%(i['current'])
@@ -42,11 +48,14 @@ def set_dns():
 	print dns
 
 
+#Delete OLD records
+
 def delete_old():
 	i=get_args()
         print "Deleting DNS for %s"%(i['current'])
         dns=os.system('<script> -r A --host %s'%(i['current']))
         print dns
+
 
 
 
